@@ -1,0 +1,4 @@
+# this file is used to ignore the files while pushing th project to npm package.
+hardhat.config.js
+scripts
+test
