@@ -4,11 +4,11 @@ pragma solidity 0.8.7;
 import "./Library.sol";
 
 contract FundMe {
-    using priceConverter for uint256;
+    using PriceConverter for uint256;
 
     address[] public senders;
 
-    uint256 public constant minimumUsd = 1 * 1e18;
+    uint256 public constant MINIMUN_USD = 1 * 1e18;
     mapping(address => uint256) public addressToValue;
 
     address public immutable owner;
@@ -19,7 +19,7 @@ contract FundMe {
 
     function fundme() public payable {
         require(
-            priceConverter.getConverstionRate(msg.value) > minimumUsd,
+            PriceConverter.getConverstionRate(msg.value) > MINIMUN_USD,
             "don't enough fund"
         );
         senders.push(msg.sender);
@@ -41,8 +41,10 @@ contract FundMe {
         // bool snedFail = payable(msg.sender).send(address(this).balance);
         // require(snedFail , "send Failes");
 
-        (bool callSuccess, ) = // bytes memory dataReturn
-        payable(msg.sender).call{value: address(this).balance}("");
+        (
+            bool callSuccess, // bytes memory dataReturn
+
+        ) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "call failed");
     }
 
