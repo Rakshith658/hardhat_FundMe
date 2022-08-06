@@ -4,7 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "yarn hardhat compile"
+    "start": "yarn hardhat compile",
+    "deploy": "yarn hardhat deploy --network rinkeby",
+    "dev": "yarn hardhat deploy --tags mocks",
+    "staging": "yarn hardhat deploy --tags fundme",
+    "lint": "yarn solhint 'contracts/*.sol",
+    "coverage": "yarn hardhat covrage"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.4.1",
